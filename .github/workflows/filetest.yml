@@ -21,13 +21,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Set permissions for Cypress binary
+        run: chmod +x $(npm bin)/cypress
+      
+      - name: Verifikasi Cypress installation
+        run: npx cypress verify
+
+      - name: Cek apakah Cypress ada sebelum dijalankan
+        run: ls -l $(npm bin)/cypress
 
       - name: Jalankan Cypress tests
-        run: npx cypress run
+        run: npx cypress run --headless --no-sandbox
 
       - name: Upload Cypress video dan screenshot (optional)
         if: failure()

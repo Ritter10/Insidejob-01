@@ -34,11 +34,12 @@ jobs:
           restore-keys: |
             cypress-cache-${{ runner.os }}-
 
+      # FIX: Beri izin dulu sebelum install binary
+      - name: Beri izin eksekusi pada Cypress
+        run: chmod +x node_modules/.bin/cypress || true
+
       - name: Install Cypress binary
         run: npx cypress install
-
-      - name: Beri izin eksekusi pada Cypress
-        run: chmod +x node_modules/.bin/cypress
 
       - name: Jalankan Cypress tests
         run: npx cypress run

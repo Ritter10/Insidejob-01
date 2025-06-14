@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: BELAJAR CYPRESS
 
 on:
   push:

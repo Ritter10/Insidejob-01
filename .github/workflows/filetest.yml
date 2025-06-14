@@ -1,6 +1,5 @@
 name: BELAJAR CYPRESS
 
-
 on:
   push:
     branches:
@@ -18,17 +17,21 @@ jobs:
     steps:
       - name: Checkout kode
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
 
       - name: Install dependencies
         run: npm install
 
+      - name: Beri izin eksekusi pada Cypress
+        run: chmod +x node_modules/.bin/cypress
+
       - name: Jalankan Cypress tests
         run: npx cypress run
+        shell: bash  # Pastikan Cypress berjalan dengan shell bash
 
       - name: Upload Cypress video dan screenshot (optional)
         if: failure()
